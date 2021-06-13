@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const urlSchema = {
-  actualUrl: {
+  originalUrl: {
     type: String,
     require: true,
   },
