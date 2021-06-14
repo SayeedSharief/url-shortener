@@ -1,39 +1,57 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
 
 export default class UrlComponent extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    state = {
-        url:""
-    }
-    submitUrl = async (event) => {
-        event.preventDefault();
-        console.log("URL =", this.state.url);
-        let serviceUrl = "http://localhost:4000/api/getShortUrl";
-        let getListUrl = "http://localhost:4000/api/getUrlList";
-        let body = {
-            "url": this.state.url
-        }
-        let response = await axios.post(serviceUrl, body);
-        this.setState({
-            url: ""
-        })
-        console.log("🚀 ~ file: urlComponent.js ~ line 19 ~ UrlComponent ~ submitUrl= ~ response", response);        
+  constructor(props) {
+    super(props);
+  }
+  generatedUrl = "";
+  state = {
+    url: "",
+  };
+  submitUrl = async (event) => {
+    event.preventDefault();
+    console.log("URL =", this.state.url);
+    let serviceUrl = "http://localhost:4000/api/getShortUrl";
+    let getListUrl = "http://localhost:4000/api/getUrlList";
+    let body = {
+      url: this.state.url,
+    };
+    let response = await axios.post(serviceUrl, body);
+    this.setState({
+      url: "",
+    });
+    this.generatedUrl = response.data.shortUrl;
+    console.log(
+      "🚀 ~ file: urlComponent.js ~ line 19 ~ UrlComponent ~ submitUrl= ~ response",
+      response
+    );
 
-        let urlList = await axios.get(getListUrl);
-        console.log("🚀 ~ file: urlComponent.js ~ line 26 ~ UrlComponent ~ submitUrl= ~ urlList", urlList);
-        this.props.functionRef(urlList.data);
-    }
+    let urlList = await axios.get(getListUrl);
+    console.log(
+      "🚀 ~ file: urlComponent.js ~ line 26 ~ UrlComponent ~ submitUrl= ~ urlList",
+      urlList
+    );
+    this.props.functionRef(urlList.data);
+  };
 
-    render() {
-        return(
-            <form onSubmit={this.submitUrl}>
-                <input type="text" placeholder="Enter the original url" value={this.state.url} 
-                   onChange={(event) => this.setState({url: event.target.value})} />
-                <button>Submit</button>
-            </form>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.submitUrl}>
+          <input
+            type="text"
+            placeholder="Enter the original url"
+            value={this.state.url}
+            onChange={(event) => this.setState({ url: event.target.value })}
+          />
+          <button>Submit</button>
+        </form>
+        <div style={{ marginTop: "15px" }}>
+          <span>Short Generated Url :</span>
+          <span>{this.generatedUrl}</span>
+        </div>
+      </div>
+    );
+  }
 }
