@@ -6,11 +6,14 @@
 ### Node 14.17
 ### MongoDB 4
 
-In the project directory, you can run:
 
-### `npm start`
+## Install Dependencies
 
-Runs the app in the development mode.\
+### run "npm install" inside root folder
+
+### run "npm install" inside **url-shortener\src\server**
+
+## Runs the app in the development mode in the root folder by **npm start** command
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
