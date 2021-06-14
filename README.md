@@ -1,8 +1,10 @@
-# Getting Started with Create React App
+# Steps to run the App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Download the following
+
+### Node 14.17
+### MongoDB 4
 
 In the project directory, you can run:
 
